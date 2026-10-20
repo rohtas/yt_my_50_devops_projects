@@ -1,0 +1,24 @@
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Git Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/gsharma1298/yt_my_50_devops_projects.git'
+            }
+        }
+
+        stage('Terraform Init and Apply') {
+            steps {
+                dir('project09') {
+                    sh '''
+                       terraform init
+                        terraform apply -auto-approve
+                    '''
+                }
+            }
+        }
+    }
+}
